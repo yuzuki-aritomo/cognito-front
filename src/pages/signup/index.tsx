@@ -1,6 +1,8 @@
+import { callSignUpApi } from "@/api/signUpApi";
 import { useState } from "react";
 
 const Page = () => {
+  const [username, setUsername] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState<string[]>([]);
@@ -11,6 +13,12 @@ const Page = () => {
     console.log("Password:", password);
     console.log("User Type:", userType);
     // ここでフォームデータをサーバーに送信するなどの処理を行います
+    callSignUpApi({
+      username: username,
+      phone_number: phoneNumber,
+      password,
+      user_type: userType,
+    });
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,12 +27,19 @@ const Page = () => {
       checked ? [...data, value] : data.filter((type) => type !== value)
     );
   };
-  console.log(userType.includes("staff"));
 
   return (
     <div>
       <h2>新規登録</h2>
       <form onSubmit={handleSubmit}>
+        <div>
+          <label>ユーザー名:</label>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
         <div>
           <label>電話番号:</label>
           <input
