@@ -3,12 +3,15 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 type User = {
-  sub: string | null;
-  phoneNumber: string | null;
+  id: string;
+  sub: string;
+  phoneNumber: string;
+  username: string;
+  email: string | null;
 };
 
 const Page = () => {
-  const [user, setUer] = useState<User>({ sub: null, phoneNumber: null });
+  const [user, setUer] = useState<User | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -18,10 +21,15 @@ const Page = () => {
         router.push("/login");
         return;
       }
-      setUer({
-        sub: res?.user.sub,
-        phoneNumber: res?.user.phone_number,
-      });
+      if (res?.user) {
+        setUer({
+          id: res.user.id,
+          sub: res.user.cognito_sub,
+          phoneNumber: res.user.phone_number,
+          username: res.user.username,
+          email: res.user.email,
+        });
+      }
     };
     call();
   }, [router]);
@@ -29,8 +37,15 @@ const Page = () => {
   return (
     <div>
       <h1>Home</h1>
-      <p>sub: {user.sub}</p>
-      <p>phone_number: {user.phoneNumber}</p>
+      {user && (
+        <>
+          <p>id: {user.id}</p>
+          <p>sub: {user.sub}</p>
+          <p>username: {user.username}</p>
+          <p>phone_number: {user.phoneNumber}</p>
+          <p>email: {user.email}</p>
+        </>
+      )}
     </div>
   );
 };
