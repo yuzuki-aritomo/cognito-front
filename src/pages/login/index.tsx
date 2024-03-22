@@ -10,7 +10,7 @@ const Page = () => {
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     await callLoginApi({ id, password });
-    // router.push("/home");
+    router.push("/home");
   };
 
   return (
