@@ -25,6 +25,7 @@ const Page = () => {
       user_type: userType,
     });
     setIsComplete(true);
+    router.push("/login");
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
