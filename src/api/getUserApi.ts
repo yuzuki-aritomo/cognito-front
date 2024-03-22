@@ -6,9 +6,21 @@ export const callGetUser = async () => {
   try {
     const response = await axios.get(`${API_ENDPOINT}/home`, {
       headers: {
-        'access-token': token,
+        "access-token": token,
       },
     });
-    return response.data;
-  } catch (error) {}
+    return {
+      user: response.data.user,
+      error: null,
+    };
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      if (error.response?.status === 401) {
+        return {
+          user: null,
+          error: "Unauthorized",
+        };
+      }
+    }
+  }
 };

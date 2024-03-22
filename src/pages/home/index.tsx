@@ -1,4 +1,5 @@
 import { callGetUser } from "@/api/getUserApi";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 type User = {
@@ -8,17 +9,22 @@ type User = {
 
 const Page = () => {
   const [user, setUer] = useState<User>({ sub: null, phoneNumber: null });
+  const router = useRouter();
+
   useEffect(() => {
     const call = async () => {
       const res = await callGetUser();
-      console.log(res);
+      if (res?.error === "Unauthorized") {
+        router.push("/login");
+        return;
+      }
       setUer({
-        sub: res.user.sub,
-        phoneNumber: res.user.phone_number,
+        sub: res?.user.sub,
+        phoneNumber: res?.user.phone_number,
       });
     };
     call();
-  }, []);
+  }, [router]);
 
   return (
     <div>
