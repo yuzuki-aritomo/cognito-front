@@ -13,8 +13,12 @@ const Page = () => {
     router.push("/home");
   };
 
+  const lineLoginUrl = process.env.NEXT_PUBLIC_OAUTH2_LINE_URL as string;
+
   return (
     <div>
+      <h1>LOGIN</h1>
+      <button onClick={() => router.replace(lineLoginUrl)}>LINE LOGIN</button>
       <form onSubmit={handleSubmit}>
         <div>
           <label>ID:</label>
