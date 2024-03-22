@@ -12,6 +12,7 @@ type User = {
 
 const Page = () => {
   const [user, setUer] = useState<User | null>(null);
+  const [groups, setGroups] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -30,6 +31,9 @@ const Page = () => {
           email: res.user.email,
         });
       }
+      if (res?.groups) {
+        setGroups(res.groups);
+      }
     };
     call();
   }, [router]);
@@ -46,6 +50,14 @@ const Page = () => {
           <p>email: {user.email}</p>
         </>
       )}
+      <h2>Groups</h2>
+      {groups.map((group: any) => (
+        <div key={group.group_name}>
+          <h2>グループ</h2>
+          <p>group_name: {group.group_name}</p>
+          <p>description: {group.description}</p>
+        </div>
+      ))}
     </div>
   );
 };

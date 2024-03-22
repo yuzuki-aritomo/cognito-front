@@ -11,6 +11,7 @@ export const callGetUser = async () => {
     });
     return {
       user: response.data.user,
+      groups: response.data.groups,
       error: null,
     };
   } catch (error) {
@@ -18,6 +19,7 @@ export const callGetUser = async () => {
       if (error.response?.status === 401) {
         return {
           user: null,
+          groups: [],
           error: "Unauthorized",
         };
       }
