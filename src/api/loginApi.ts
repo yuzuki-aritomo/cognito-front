@@ -17,6 +17,5 @@ export const callLoginApi = async (formData: loginData) => {
     localStorage.setItem("refresh_token", response.data.token.refresh_token);
   } catch (error) {
     console.error("Error:", error);
-    throw error;
   }
 };
