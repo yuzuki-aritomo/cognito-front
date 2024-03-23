@@ -6,5 +6,5 @@ First, run the development server:
 cp .env.example .env
 # set .env variables
 yarn install
-yarn dev
+yarn dev -p 1999 # for development
 ```
