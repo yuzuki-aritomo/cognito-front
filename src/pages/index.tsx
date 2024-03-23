@@ -9,6 +9,8 @@ export default function Home() {
       <Link href="/login">Login</Link>
       <br />
       <Link href="/home">Home</Link>
+      <br />
+      <Link href="/forgot_password">Reset Password</Link>
     </>
   );
 }
