@@ -7,8 +7,8 @@ const Page = () => {
 
   useEffect(() => {
     if (typeof access_token === "string" && typeof refresh_token === "string") {
-      localStorage.setItem("access_token", access_token);
-      localStorage.setItem("refresh_token", refresh_token);
+      document.cookie = `access-token=${access_token}; path=/; HttpOnly;`;
+      document.cookie = `refresh-token=${refresh_token}; path=/; HttpOnly;`;
       router.push("/home");
     }
   }, [access_token, refresh_token, router]);
