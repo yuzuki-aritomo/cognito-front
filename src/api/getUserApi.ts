@@ -8,6 +8,7 @@ export const callGetUser = async () => {
       headers: {
         "access-token": token,
       },
+      withCredentials: true,
     });
     return {
       user: response.data.user,
