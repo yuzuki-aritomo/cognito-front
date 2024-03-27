@@ -8,7 +8,9 @@ type loginData = {
 
 export const callLoginApi = async (formData: loginData) => {
   try {
-    const response = await axios.post(`${API_ENDPOINT}/login`, formData);
+    const response = await axios.post(`${API_ENDPOINT}/login`, formData, {
+      withCredentials: true,
+    });
     console.log("Response:", response.data);
     if (response.data.token.access_token === undefined) {
       throw new Error("Access token is not found");

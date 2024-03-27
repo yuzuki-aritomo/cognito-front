@@ -1,1 +1,1 @@
-export const API_ENDPOINT = "http://localhost:2000";
+export const API_ENDPOINT = "http://localhost:3000";
